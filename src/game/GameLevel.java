@@ -229,7 +229,7 @@ public class GameLevel implements Animation {
         d.drawText(35, 60, "Press P for pause", 12);
         //let each object know that an iteration occurred, and time has passed.
         this.sprites.notifyAllTimePassed();
-        if (this.keyboard.isPressed("p")) {
+        if (this.keyboard.isPressed("p")||(this.keyboard.isPressed("פ"))||(this.keyboard.isPressed("P"))) {
             if (!isAlreadyPressed) {
                 this.runner.run(new KeyPressStoppableAnimation(this.keyboard,
                         new PauseScreen(this.scoreCounter, this.sprites, this.getInformation())));
