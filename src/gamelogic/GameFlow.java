@@ -33,7 +33,7 @@ public class GameFlow {
         this.animationRunner = ar;
         this.keyboardSensor = ks;
         this.scoreCounter = new Counter(0);
-        this.lives = new Counter(3);
+        this.lives = new Counter(0);
     }
 
     /**
@@ -59,7 +59,7 @@ public class GameFlow {
                 } else {
                     this.animationRunner.run(new KeyPressStoppableAnimation(this.keyboardSensor,
                             new GameOver(this.scoreCounter, level.getSprites(), level.getInformation())));
-                    this.animationRunner.getGui().close();
+                    return;
                 }
             }
             //if reached here, the level ended with all blocks popped, increase points and level up.
