@@ -30,7 +30,6 @@ I implemented the game with Java language using Intellij IDEA Ultimate IDE, usin
 4. Open CMD/Git Bash in the cloned directory and run this command to enter the game manu:
     ```
     $ ant run
-
 ## Instructions
 * Press 'Up' or 'Down' arrows to navigate through the manu.
 * Press 'Enter' to select an option\ to start a game.
