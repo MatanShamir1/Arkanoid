@@ -1,8 +1,8 @@
 # Arkanoid!
 1. [About](#About)
 2. [Dependencies](#dependencies)  
-3. [Installation instructions](#installation instructions)
-4. [Game instructions](#game instructions)
+3. [Installation instructions](#Installation instructions)
+4. [Game instructions](#Game instructions)
 5. [Simulation](#simulation)
 
 
