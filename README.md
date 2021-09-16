@@ -1,8 +1,8 @@
 # Arkanoid!
 1. [About](#About)
 2. [Dependencies](#dependencies)  
-3. [Installation instructions](#Installation instructions)
-4. [Game instructions](#Game instructions)
+3. [Installation](#Installation)
+4. [instructions](#instructions)
 5. [Simulation](#simulation)
 
 
@@ -22,7 +22,7 @@ The game is implemented in Java using OOP principles:
 * Git
 * Keyboard that contains: Spacebar (for stoppage), "P" button, and all arrows.
 * Apache Ant
-## Installation instructions
+## Installation
 1. Clone the repository:  
     ```
     $ git clone https://github.com/MatanShamir1998/Arkanoid.git
@@ -33,7 +33,7 @@ The game is implemented in Java using OOP principles:
     ```
     $ ant run
 
-## game instructions
+## Instructions
 * Press 'Up' or 'Down' arrows to navigate through the manu.
 * Press 'Enter' to select an option\ to start a game.
 * Use the 'Left' and 'Right' arrows to control the paddle. 
