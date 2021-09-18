@@ -16,16 +16,16 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Manu implements Animation {
+public class Menu implements Animation {
     private Background background;
     private final String[] options;
     private int toDo;
     private AnimationRunner runner;
     private boolean isAlreadyPressed;
 
-    public Manu() {
+    public Menu() {
         this.background = this.initBackground();
-        this.options = new String[]{"Start", "Leader Board", "Help", "About"};
+        this.options = new String[]{"Start", "Leader Board", "Instructions", "About"};
         this.toDo = 0;
         //create a runner for the whole game, each level uses the same runner.
         this.runner = new AnimationRunner();
@@ -63,7 +63,7 @@ public class Manu implements Animation {
 
     @Override
     public void doOneFrame(DrawSurface d) {
-        this.drawScreen(d);
+        this.drawManu(d);
         if (this.runner.getGui().getKeyboardSensor().isPressed(KeyboardSensor.ENTER_KEY)) {
             this.activate();
         }
@@ -100,7 +100,7 @@ public class Manu implements Animation {
         return false;
     }
 
-    private void drawScreen(DrawSurface d) {
+    private void drawManu(DrawSurface d) {
         this.background.drawOn(d);
         Color defaultColor = Color.BLACK;
         d.setColor(defaultColor);
@@ -116,31 +116,40 @@ public class Manu implements Animation {
             }
             defaultColor = Color.CYAN;
         }
+        d.setColor(Color.BLACK);
+        d.drawText(35, 30, "Press ENTER to choose", 12);
     }
 
     public void activate() {
-        if(this.toDo == 0) {
-            //create a new game flow.
-            GameFlow gameFlow = new GameFlow(runner, runner.getGui().getKeyboardSensor());
-            //create a list of levels.
-            List<LevelInformation> levels = new ArrayList<>();
-            levels.add(new BullsEye());
-            levels.add(new EasyPeasy());
-            levels.add(new EmpireState());
-            levels.add(new FinalLevel());
-            //run the game flow.
-            gameFlow.runLevels(levels);
-        } else if (this.toDo == 1){
-
-        } else if (this.toDo == 2){
-
-        } else if (this.toDo == 3){
-
+        try {
+            if (this.toDo == 0) {
+                //create a new game flow.
+                GameFlow gameFlow = new GameFlow(runner, runner.getGui().getKeyboardSensor());
+                //create a list of levels.
+                List<LevelInformation> levels = new ArrayList<>();
+                levels.add(new BullsEye());
+                levels.add(new EasyPeasy());
+                levels.add(new EmpireState());
+                levels.add(new FinalLevel());
+                //run the game flow.
+                gameFlow.runLevels(levels);
+            } else if (this.toDo == 1) {
+                this.runner.run(new KeyPressStoppableAnimation(this.runner.getGui().getKeyboardSensor(), new Leaderboard(this.background)));
+            } else if (this.toDo == 2) {
+                this.runner.run(new KeyPressStoppableAnimation(this.runner.getGui().getKeyboardSensor(), new Instructions(this.background)));
+            } else if (this.toDo == 3) {
+                this.runner.run(new KeyPressStoppableAnimation(this.runner.getGui().getKeyboardSensor(), new About(this.background)));
+            }
+        } catch (Exception ignored) {
         }
     }
 
     public static void main(String[] args) {
-        Manu manu = new Manu();
-        manu.runner.run(manu);
+        Menu menu = new Menu();
+        try {
+            menu.runner.run(menu);
+        }catch (Exception ignored){
+
+        }
     }
 }

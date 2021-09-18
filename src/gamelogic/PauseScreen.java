@@ -47,6 +47,7 @@ public class PauseScreen implements Animation {
         d.drawText(d.getWidth() / 2 - 80, 100, "Paused", 40);
         d.drawText(d.getWidth() / 2 - 150, d.getHeight() / 3 * 2,
                 "Current score:" + this.score.getValue(), 40);
+        d.drawText(255, d.getHeight() / 3 * 2 + 50, "Press 'q' to main menu", 20);
     }
 
     @Override

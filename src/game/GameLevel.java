@@ -197,7 +197,7 @@ public class GameLevel implements Animation {
      * and orders it to run the game. it also updates the required fields and information in the game,
      * depended on the reason that the game ended.
      */
-    public void run() {
+    public void run() throws Exception{
         /*
         generate the balls only now, to make sure if we re-entered the game, the balls are re-created
         unlike the other sprites in the game!
@@ -222,7 +222,7 @@ public class GameLevel implements Animation {
     }
 
     @Override
-    public void doOneFrame(DrawSurface d) {
+    public void doOneFrame(DrawSurface d) throws Exception{
         this.information.getBackground().drawOn(d);
         this.sprites.drawAllOn(d);
         d.setColor(this.information.countdownColor());

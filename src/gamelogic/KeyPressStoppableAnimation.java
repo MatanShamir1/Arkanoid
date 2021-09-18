@@ -38,7 +38,7 @@ public class KeyPressStoppableAnimation implements Animation {
     }
 
     @Override
-    public void doOneFrame(DrawSurface d) {
+    public void doOneFrame(DrawSurface d) throws Exception {
         //do one frame in the original animation.
         this.animation.doOneFrame(d);
         //the logic to turn off and on the display of "press space to continue".
@@ -54,6 +54,9 @@ public class KeyPressStoppableAnimation implements Animation {
         if entered the animation and the key to move on was already pressed, the player's will was not
         to press it in the current animation. we fix this bug using the "already pressed" logic.
          */
+        if ((this.keyboard.isPressed("q"))||(this.keyboard.isPressed("Q"))||(this.keyboard.isPressed("/"))) {
+            throw new Exception("back to menu");
+        }
         if (this.keyboard.isPressed(KeyboardSensor.SPACE_KEY)) {
 
             //if the key was not already pressed, stop the animation.

@@ -35,7 +35,7 @@ public class AnimationRunner {
      *
      * @param animation the animation that the runner should run on the screen.
      */
-    public void run(Animation animation) {
+    public void run(Animation animation) throws Exception{
         int millisecondsPerFrame = 1000 / this.framesPerSecond;
         // the infinite while loop: compute starting and ending time of each run.
         while (!animation.shouldStop()) {

@@ -17,7 +17,7 @@ public interface Animation {
      *
      * @param d the drawsurface for the animation to able to draw in the specific frame.
      */
-    void doOneFrame(DrawSurface d);
+    void doOneFrame(DrawSurface d) throws Exception;
 
     /**
      * this method checks for actions performed by the player and so it tells the animation whether or

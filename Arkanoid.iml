@@ -2,10 +2,18 @@
 <module version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
+<<<<<<< HEAD
     <content url="file://$MODULE_DIR$/src">
+=======
+    <content url="file://$MODULE_DIR$">
+>>>>>>> 11481fd (added about,instru in menu, plus q to main menu via exception)
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
     <orderEntry type="jdk" jdkName="16" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+<<<<<<< HEAD
+=======
+    <orderEntry type="library" name="biuoop-1.4" level="application" />
+>>>>>>> 11481fd (added about,instru in menu, plus q to main menu via exception)
   </component>
 </module>

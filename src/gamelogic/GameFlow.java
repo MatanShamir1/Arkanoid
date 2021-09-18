@@ -41,7 +41,7 @@ public class GameFlow {
      *
      * @param levels a list of the level's information, to be able to create suitable levels.
      */
-    public void runLevels(List<LevelInformation> levels) {
+    public void runLevels(List<LevelInformation> levels) throws Exception{
         //run a for-each loop and do the same for every level:
         for (LevelInformation levelInformation : levels) {
             //create a new level with the information, and give references to this runner, keyboard, etc.
