@@ -15,7 +15,7 @@
     </target>
 
     <target name="run" depends="compile" >
-        <java classname="gamelogic.Manu" classpath="${classpath}" fork="true">
+        <java classname="gamelogic.Menu" classpath="${classpath}" fork="true">
             <!-- This specifies to pass the arguments from the `ant` command into the `java` execution command -->
             <arg line="${args}"/>
         </java>
