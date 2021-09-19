@@ -143,18 +143,18 @@ public class Menu implements Animation {
         }
         d.setColor(Color.BLACK);
         d.drawText(35, 30, "Press ENTER to choose", 12);
-        d.fillRectangle(540, 240, 170, 10);
-        d.drawLine(700, 250, this.ballRight.getX(), this.ballRight.getY());
-        d.drawLine(550, 250, this.ballLeft.getX(), this.ballLeft.getY());
+        d.fillRectangle(547, 240, 100, 10);
+        d.drawLine(630, 250, this.ballRight.getX(), this.ballRight.getY());
+        d.drawLine(630-16*4, 250, this.ballLeft.getX(), this.ballLeft.getY());
         if ((this.ballRight.getVelocity().getAngle() < 90)&& (this.ballRight.getVelocity().getAngle() > 45)) {
-            ballLeft.setVelocity(Velocity.fromAngleAndSpeed(this.ballLeft.getVelocity().getAngle() + 0.7, this.ballLeft.getVelocity().getSpeed()));
-            ballRight.setVelocity(Velocity.fromAngleAndSpeed(this.ballRight.getVelocity().getAngle() - 0.7, this.ballLeft.getVelocity().getSpeed()));
+            ballLeft.setVelocity(Velocity.fromAngleAndSpeed(this.ballLeft.getVelocity().getAngle() + 1.7, this.ballLeft.getVelocity().getSpeed()));
+            ballRight.setVelocity(Velocity.fromAngleAndSpeed(this.ballRight.getVelocity().getAngle() - 1.7, this.ballLeft.getVelocity().getSpeed()));
         } else if((this.ballRight.getVelocity().getAngle() <= 45)||(this.ballRight.getVelocity().getAngle() >= 270)) {
             ballRight.setVelocity(-this.ballRight.getVelocity().getDx(), -this.ballRight.getVelocity().getDy());
             ballLeft.setVelocity(-this.ballLeft.getVelocity().getDx(), -this.ballLeft.getVelocity().getDy());
         }else if ((this.ballRight.getVelocity().getAngle() > 224)&&(this.ballRight.getVelocity().getAngle() < 270)) {
-            ballLeft.setVelocity(Velocity.fromAngleAndSpeed(this.ballLeft.getVelocity().getAngle() - 0.7, this.ballLeft.getVelocity().getSpeed()));
-            ballRight.setVelocity(Velocity.fromAngleAndSpeed(this.ballRight.getVelocity().getAngle() + 0.7, this.ballLeft.getVelocity().getSpeed()));
+            ballLeft.setVelocity(Velocity.fromAngleAndSpeed(this.ballLeft.getVelocity().getAngle() - 1.7, this.ballLeft.getVelocity().getSpeed()));
+            ballRight.setVelocity(Velocity.fromAngleAndSpeed(this.ballRight.getVelocity().getAngle() + 1.7, this.ballLeft.getVelocity().getSpeed()));
         }
     }
 
