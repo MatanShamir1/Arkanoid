@@ -2,7 +2,7 @@
   <artifact type="jar" name="ass6:jar">
     <output-path>$PROJECT_DIR$/ass6_jar</output-path>
     <root id="archive" name="ass6.jar">
-      <element id="module-output" name="ass6" />
+      <element id="module-output" name="Arkanoid" />
       <element id="library" level="application" name="api" />
       <element id="extracted-dir" path="$PROJECT_DIR$/biuoop-1.4.jar" path-in-jar="/" />
     </root>

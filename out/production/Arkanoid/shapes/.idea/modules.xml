@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Arkanoid.iml" filepath="$PROJECT_DIR$/Arkanoid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shapes.iml" filepath="$PROJECT_DIR$/shapes.iml" />
     </modules>
   </component>
 </project>
