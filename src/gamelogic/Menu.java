@@ -2,26 +2,29 @@ package gamelogic;
 
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
+import game.GameEnvironment;
 import game.GameLevel;
+import game.SpriteCollection;
 import levels.*;
-import shapes.Circle;
-import shapes.Line;
-import shapes.Point;
-import shapes.Rectangle;
+import shapes.*;
 import sprites.Background;
+import sprites.Block;
 import sprites.Shape;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Menu implements Animation {
-    private Background background;
+    private final Background background;
     private final String[] options;
     private int toDo;
-    private AnimationRunner runner;
+    private final AnimationRunner runner;
     private boolean isAlreadyPressed;
+    private SpriteCollection spriteCollection;
+    private Ball ballLeft;
+    private Ball ballRight;
 
     public Menu() {
         this.background = this.initBackground();
@@ -30,6 +33,21 @@ public class Menu implements Animation {
         //create a runner for the whole game, each level uses the same runner.
         this.runner = new AnimationRunner();
         this.isAlreadyPressed = true;
+        createMenuEnvironment();
+    }
+
+    private void createMenuEnvironment(){
+        this.spriteCollection = new SpriteCollection();
+        this.ballRight = new Ball(630,400,8,Color.BLUE,new Velocity(2,-0.1));
+        Ball ball1 = new Ball(630-16,400,8,Color.BLUE,new Velocity(0,0));
+        Ball ball2 = new Ball(630-16*2,400,8,Color.BLUE,new Velocity(0,0));
+        Ball ball3 = new Ball(630-16*3,400,8,Color.BLUE,new Velocity(0,0));
+        this.ballLeft = new Ball(630-16*4,400,8,Color.BLUE,new Velocity(-2,-0.1));
+        spriteCollection.addSprite(ballLeft);
+        spriteCollection.addSprite(ballRight);
+        spriteCollection.addSprite(ball1);
+        spriteCollection.addSprite(ball2);
+        spriteCollection.addSprite(ball3);
     }
 
     private Background initBackground() {
@@ -63,7 +81,9 @@ public class Menu implements Animation {
 
     @Override
     public void doOneFrame(DrawSurface d) {
-        this.drawManu(d);
+        this.drawMenu(d);
+        this.spriteCollection.notifyAllTimePassed();
+        this.spriteCollection.drawAllOn(d);
         if (this.runner.getGui().getKeyboardSensor().isPressed(KeyboardSensor.ENTER_KEY)) {
             this.activate();
         }
@@ -100,24 +120,42 @@ public class Menu implements Animation {
         return false;
     }
 
-    private void drawManu(DrawSurface d) {
+    private void drawMenu(DrawSurface d) {
         this.background.drawOn(d);
+        d.setColor(Color.BLACK);
+        d.drawText(203, 103, "Arkanoid", 70);
+        d.setColor(Color.RED);
+        d.drawText(200, 100, "Arkanoid", 70);
         Color defaultColor = Color.BLACK;
         d.setColor(defaultColor);
         for (int j = 0; j <= 1; j++) {
-            int initialPosition = 100;
+            int initialPosition = 200;
             for (int i = 0; i < this.options.length; i++) {
                 d.setColor(defaultColor);
                 if (i == this.toDo && j == 1) {
                     d.setColor(Color.BLUE);
                 }
-                d.drawText(d.getWidth() / 2 - 80 - j * 3, initialPosition - j * 3, this.options[i], 50);
-                initialPosition += 150;
+                d.fillCircle(50 - j * 3, initialPosition - 17 - j * 3, 10);
+                d.drawText(70 - j * 3, initialPosition - j * 3, this.options[i], 50);
+                initialPosition += 110;
             }
             defaultColor = Color.CYAN;
         }
         d.setColor(Color.BLACK);
         d.drawText(35, 30, "Press ENTER to choose", 12);
+        d.fillRectangle(540, 240, 170, 10);
+        d.drawLine(700, 250, this.ballRight.getX(), this.ballRight.getY());
+        d.drawLine(550, 250, this.ballLeft.getX(), this.ballLeft.getY());
+        if ((this.ballRight.getVelocity().getAngle() < 90)&& (this.ballRight.getVelocity().getAngle() > 45)) {
+            ballLeft.setVelocity(Velocity.fromAngleAndSpeed(this.ballLeft.getVelocity().getAngle() + 0.7, this.ballLeft.getVelocity().getSpeed()));
+            ballRight.setVelocity(Velocity.fromAngleAndSpeed(this.ballRight.getVelocity().getAngle() - 0.7, this.ballLeft.getVelocity().getSpeed()));
+        } else if((this.ballRight.getVelocity().getAngle() <= 45)||(this.ballRight.getVelocity().getAngle() >= 270)) {
+            ballRight.setVelocity(-this.ballRight.getVelocity().getDx(), -this.ballRight.getVelocity().getDy());
+            ballLeft.setVelocity(-this.ballLeft.getVelocity().getDx(), -this.ballLeft.getVelocity().getDy());
+        }else if ((this.ballRight.getVelocity().getAngle() > 224)&&(this.ballRight.getVelocity().getAngle() < 270)) {
+            ballLeft.setVelocity(Velocity.fromAngleAndSpeed(this.ballLeft.getVelocity().getAngle() - 0.7, this.ballLeft.getVelocity().getSpeed()));
+            ballRight.setVelocity(Velocity.fromAngleAndSpeed(this.ballRight.getVelocity().getAngle() + 0.7, this.ballLeft.getVelocity().getSpeed()));
+        }
     }
 
     public void activate() {

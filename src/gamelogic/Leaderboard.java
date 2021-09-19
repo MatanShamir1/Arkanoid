@@ -31,9 +31,11 @@ public class Leaderboard implements Animation {
     public void doOneFrame(DrawSurface d) {
         //display the background and the sprites on the screen to show continuation on the screen.
         this.background.drawOn(d);
+        d.setColor(Color.BLUE);
+        d.drawText(d.getWidth() / 2 - 97, 53, "Top 10:", 50);
         d.setColor(Color.BLACK);
         //show game over on the screen.
-        d.drawText(d.getWidth() / 2 - 140, 50, "Top 10:", 30);
+        d.drawText(d.getWidth() / 2 - 100, 50, "Top 10:", 50);
         d.drawText(30, 100, "1:", 15);
         d.drawText(30, 140, "2:", 15);
         d.drawText(30, 180, "3:", 15);
@@ -43,7 +45,7 @@ public class Leaderboard implements Animation {
         d.drawText(30, 340, "7:", 15);
         d.drawText(30, 380, "8:", 15);
         d.drawText(30, 420, "9:", 15);
-        d.drawText(30, 480, "10:", 15);
+        d.drawText(30, 460, "10:", 15);
     }
 
     @Override

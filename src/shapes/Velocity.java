@@ -118,6 +118,11 @@ public class Velocity {
         return Math.sqrt(Math.pow(this.dx, 2) + Math.pow(this.dy, 2));
     }
 
+    public double getAngle() {
+        double radians = Math.asin(dx/this.getSpeed());
+        return radians * (180/Math.PI);
+    }
+
     /**
      * @return the sign of the dx.
      */

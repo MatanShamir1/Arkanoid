@@ -305,31 +305,36 @@ public class Ball extends Circle implements Sprite, HitNotifier {
      * and bounce between game objects.
      */
     public void timePassed() {
+        CollisionInfo collisionInfo = null;
         //generate a copy of the paddle by taking it from the first place of the environment.
-        Paddle paddle = (Paddle) this.gameEnvironment.getCollidables().get(0);
+        if (this.gameEnvironment != null) {
+            if (this.gameEnvironment.getCollidables().get(0) instanceof Paddle) {
+                Paddle paddle = (Paddle) this.gameEnvironment.getCollidables().get(0);
 
-        //if the ball is in the paddle, move it out and adjust to it solely.
-        if (this.isInPaddle(paddle)) {
+                //if the ball is in the paddle, move it out and adjust to it solely.
+                if (this.isInPaddle(paddle)) {
 
-            //if the ball is within bounds, move by the paddles speed out of it.
-            if (this.isInBounds(paddle)) {
-                this.freeFromPaddle(paddle);
-                return;
+                    //if the ball is within bounds, move by the paddles speed out of it.
+                    if (this.isInBounds(paddle)) {
+                        this.freeFromPaddle(paddle);
+                        return;
+                    }
+                    //else, you moved towards the wall by the paddle, and disappear from the game.
+                    this.notifyHit(this);
+                }
             }
-            //else, you moved towards the wall by the paddle, and disappear from the game.
-            this.notifyHit(this);
-        }
+
         /*
         create an ending point for the trajectory- twice the velocity direction, so that
         the ball will bounce back before hitting an object and adding the ball radius
         length(ball size) to the calculation as well.
          */
-        Point end = new Point(this.getX() + this.velocity.getDx() + this.velocity.getSignDx(),
-                this.getY() + this.velocity.getDy() + this.velocity.getSignDy());
-        Line trajectory = new Line(super.getCenter(), end);
-        //get possible collision with game objects within trajectory length from ball.
-        CollisionInfo collisionInfo = this.gameEnvironment.getClosestCollision(trajectory);
-
+            Point end = new Point(this.getX() + this.velocity.getDx() + this.velocity.getSignDx(),
+                    this.getY() + this.velocity.getDy() + this.velocity.getSignDy());
+            Line trajectory = new Line(super.getCenter(), end);
+            //get possible collision with game objects within trajectory length from ball.
+            collisionInfo = this.gameEnvironment.getClosestCollision(trajectory);
+        }
         //if there was a collision, adjust a renewed velocity according to the found info.
         if (collisionInfo != null) {
             this.adjustVelocityToHit(collisionInfo);
