@@ -68,7 +68,7 @@ public class Menu implements Animation {
         //these circles are the sun.
         Shape big = new Circle(center, 55, color, color);
         shapes.add(big);
-        color = new Color(234, 213, 72);
+        color = new Color(234, 213, 71);
         Shape medium = new Circle(center, 45, color, color);
         shapes.add(medium);
         color = new Color(253, 223, 24);
