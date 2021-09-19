@@ -38,6 +38,8 @@ public class Ball extends Circle implements Sprite, HitNotifier {
     //the ball's game environment, for object's collision calculation.
     private GameEnvironment gameEnvironment;
 
+    private boolean activated;
+
     private final List<HitListener> hitListeners;
 
     /**
@@ -58,6 +60,7 @@ public class Ball extends Circle implements Sprite, HitNotifier {
         //set the game environment of the ball to the given one for the ball to know.
         this.gameEnvironment = gameEnvironment;
         this.hitListeners = new ArrayList<>();
+        this.activated = true;
     }
 
     /**
@@ -77,6 +80,7 @@ public class Ball extends Circle implements Sprite, HitNotifier {
         //set the game environment of the ball to the given one for the ball to know.
         this.gameEnvironment = null;
         this.hitListeners = new ArrayList<>();
+        this.activated = true;
     }
 
     /**
@@ -95,6 +99,7 @@ public class Ball extends Circle implements Sprite, HitNotifier {
         //set the game environment of the ball to the given one for the ball to know.
         this.gameEnvironment = gameEnvironment;
         this.hitListeners = new ArrayList<>();
+        this.activated = true;
     }
 
     /**
@@ -123,6 +128,22 @@ public class Ball extends Circle implements Sprite, HitNotifier {
      */
     public java.awt.Color getColor() {
         return super.getInnerColor();
+    }
+
+    public void activate() {
+        this.activated = true;
+    }
+
+    public void deactivate() {
+        this.activated = false;
+    }
+
+    public boolean isActivated() {
+        return this.activated;
+    }
+
+    public void setCenter(double x, double y) {
+        super.setCenter(new Point(x, y));
     }
 
     /**
@@ -305,6 +326,9 @@ public class Ball extends Circle implements Sprite, HitNotifier {
      * and bounce between game objects.
      */
     public void timePassed() {
+        if (!this.activated) {
+            return;
+        }
         CollisionInfo collisionInfo = null;
         //generate a copy of the paddle by taking it from the first place of the environment.
         if (this.gameEnvironment != null) {

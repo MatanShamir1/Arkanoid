@@ -4,7 +4,7 @@ package shapes;
 import biuoop.DrawSurface;
 import sprites.Shape;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
 

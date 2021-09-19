@@ -15,7 +15,7 @@ import sprites.Collidable;
  */
 public class Point {
     //create a very small number, call it epsilon.
-    static final double EPSILON = Math.pow(10, -2);
+    public static final double EPSILON = Math.pow(10, -2);
     //the number zero, for further calculations.
     static final int ZERO = 0;
 

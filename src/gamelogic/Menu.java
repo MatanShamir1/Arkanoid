@@ -2,13 +2,11 @@ package gamelogic;
 
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
-import game.GameEnvironment;
 import game.GameLevel;
 import game.SpriteCollection;
 import levels.*;
 import shapes.*;
 import sprites.Background;
-import sprites.Block;
 import sprites.Shape;
 
 import java.awt.Color;
@@ -36,13 +34,14 @@ public class Menu implements Animation {
         createMenuEnvironment();
     }
 
-    private void createMenuEnvironment(){
+    private void createMenuEnvironment() {
         this.spriteCollection = new SpriteCollection();
-        this.ballRight = new Ball(630,400,8,Color.BLUE,new Velocity(2,-0.1));
-        Ball ball1 = new Ball(630-16,400,8,Color.BLUE,new Velocity(0,0));
-        Ball ball2 = new Ball(630-16*2,400,8,Color.BLUE,new Velocity(0,0));
-        Ball ball3 = new Ball(630-16*3,400,8,Color.BLUE,new Velocity(0,0));
-        this.ballLeft = new Ball(630-16*4,400,8,Color.BLUE,new Velocity(-2,-0.1));
+        this.ballRight = new Ball(630, 400, 8, Color.GRAY, new Velocity(2, 0));
+        Ball ball1 = new Ball(630 - 16, 400, 8, Color.GRAY, new Velocity(0, 0));
+        Ball ball2 = new Ball(630 - 16 * 2, 400, 8, Color.GRAY, new Velocity(0, 0));
+        Ball ball3 = new Ball(630 - 16 * 3, 400, 8, Color.GRAY, new Velocity(0, 0));
+        this.ballLeft = new Ball(630 - 16 * 4, 400, 8, Color.GRAY, new Velocity(-2, 0));
+        this.ballLeft.deactivate();
         spriteCollection.addSprite(ballLeft);
         spriteCollection.addSprite(ballRight);
         spriteCollection.addSprite(ball1);
@@ -120,6 +119,11 @@ public class Menu implements Animation {
         return false;
     }
 
+    private void resetBalls() {
+        this.ballRight.setCenter(630, 400);
+        this.ballLeft.setCenter(630 - 16 * 4, 400);
+    }
+
     private void drawMenu(DrawSurface d) {
         this.background.drawOn(d);
         d.setColor(Color.BLACK);
@@ -145,16 +149,40 @@ public class Menu implements Animation {
         d.drawText(35, 30, "Press ENTER to choose", 12);
         d.fillRectangle(547, 240, 100, 10);
         d.drawLine(630, 250, this.ballRight.getX(), this.ballRight.getY());
-        d.drawLine(630-16*4, 250, this.ballLeft.getX(), this.ballLeft.getY());
-        if ((this.ballRight.getVelocity().getAngle() < 90)&& (this.ballRight.getVelocity().getAngle() > 45)) {
-            ballLeft.setVelocity(Velocity.fromAngleAndSpeed(this.ballLeft.getVelocity().getAngle() + 1.7, this.ballLeft.getVelocity().getSpeed()));
-            ballRight.setVelocity(Velocity.fromAngleAndSpeed(this.ballRight.getVelocity().getAngle() - 1.7, this.ballLeft.getVelocity().getSpeed()));
-        } else if((this.ballRight.getVelocity().getAngle() <= 45)||(this.ballRight.getVelocity().getAngle() >= 270)) {
-            ballRight.setVelocity(-this.ballRight.getVelocity().getDx(), -this.ballRight.getVelocity().getDy());
-            ballLeft.setVelocity(-this.ballLeft.getVelocity().getDx(), -this.ballLeft.getVelocity().getDy());
-        }else if ((this.ballRight.getVelocity().getAngle() > 224)&&(this.ballRight.getVelocity().getAngle() < 270)) {
-            ballLeft.setVelocity(Velocity.fromAngleAndSpeed(this.ballLeft.getVelocity().getAngle() - 1.7, this.ballLeft.getVelocity().getSpeed()));
-            ballRight.setVelocity(Velocity.fromAngleAndSpeed(this.ballRight.getVelocity().getAngle() + 1.7, this.ballLeft.getVelocity().getSpeed()));
+        d.drawLine(630 - 16, 250, 630 - 16, 400);
+        d.drawLine(630 - 16 * 2, 250, 630 - 16 * 2, 400);
+        d.drawLine(630 - 16 * 3, 250, 630 - 16 * 3, 400);
+        d.drawLine(630 - 16 * 4, 250, this.ballLeft.getX(), this.ballLeft.getY());
+        if (this.ballRight.isActivated()) {
+            if ((this.ballRight.getVelocity().getDx() > Math.abs(this.ballRight.getVelocity().getDy())) && (this.ballRight.getVelocity().getDx() > 0)) {
+                this.ballRight.setVelocity(this.ballRight.getVelocity().getDx() - 0.02, this.ballRight.getVelocity().getDy() - 0.02);
+            } else if ((Math.abs(this.ballRight.getVelocity().getDx()) - Math.abs(this.ballRight.getVelocity().getDy()) < Point.EPSILON) && (this.ballRight.getVelocity().getDx() > 0)) {
+                this.ballRight.setVelocity(-this.ballRight.getVelocity().getDx(), -this.ballRight.getVelocity().getDy());
+                this.ballRight.setVelocity(this.ballRight.getVelocity().getDx() - 0.02, this.ballRight.getVelocity().getDy() - 0.02);
+            } else if ((Math.abs(this.ballRight.getVelocity().getDx()) > Math.abs(this.ballRight.getVelocity().getDy())) && (this.ballRight.getVelocity().getDx() < 0) && (this.ballRight.getVelocity().getDy() >= 0)) {
+                this.ballRight.setVelocity(this.ballRight.getVelocity().getDx() - 0.02, this.ballRight.getVelocity().getDy() - 0.02);
+            } else if (this.ballRight.getVelocity().getDy() < 0) {
+                this.ballRight.setVelocity(-this.ballRight.getVelocity().getDx(), -this.ballRight.getVelocity().getDy());
+                this.ballRight.setVelocity(this.ballRight.getVelocity().getDx() + 0.02, this.ballRight.getVelocity().getDy() + 0.02);
+                this.resetBalls();
+                this.ballRight.deactivate();
+                this.ballLeft.activate();
+            }
+        } else {
+            if ((Math.abs(this.ballLeft.getVelocity().getDx()) > Math.abs(this.ballLeft.getVelocity().getDy())) && (this.ballLeft.getVelocity().getDx() < 0)) {
+                this.ballLeft.setVelocity(this.ballLeft.getVelocity().getDx() + 0.02, this.ballLeft.getVelocity().getDy() - 0.02);
+            } else if ((Math.abs(this.ballLeft.getVelocity().getDx()) - Math.abs(this.ballLeft.getVelocity().getDy()) < Point.EPSILON) && (this.ballLeft.getVelocity().getDx() < 0)) {
+                this.ballLeft.setVelocity(-this.ballLeft.getVelocity().getDx(), -this.ballLeft.getVelocity().getDy());
+                this.ballLeft.setVelocity(this.ballLeft.getVelocity().getDx() + 0.02, this.ballLeft.getVelocity().getDy() - 0.02);
+            } else if ((Math.abs(this.ballLeft.getVelocity().getDx()) > Math.abs(this.ballLeft.getVelocity().getDy())) && (this.ballLeft.getVelocity().getDx() > 0) && (this.ballLeft.getVelocity().getDy() >= 0)) {
+                this.ballLeft.setVelocity(this.ballLeft.getVelocity().getDx() + 0.02, this.ballLeft.getVelocity().getDy() - 0.02);
+            } else if (this.ballLeft.getVelocity().getDy() < 0) {
+                this.ballLeft.setVelocity(-this.ballLeft.getVelocity().getDx(), -this.ballLeft.getVelocity().getDy());
+                this.ballLeft.setVelocity(this.ballLeft.getVelocity().getDx() - 0.02, this.ballLeft.getVelocity().getDy() + 0.02);
+                this.resetBalls();
+                this.ballRight.activate();
+                this.ballLeft.deactivate();
+            }
         }
     }
 
@@ -186,7 +214,7 @@ public class Menu implements Animation {
         Menu menu = new Menu();
         try {
             menu.runner.run(menu);
-        }catch (Exception ignored){
+        } catch (Exception ignored) {
 
         }
     }
