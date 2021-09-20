@@ -23,7 +23,7 @@ I implemented the game with Java language using Intellij IDEA Ultimate IDE, usin
 ## Installation
 1. Clone the repository:  
     ```
-    $ git clone https://github.com/MatanShamir1998/Arkanoid.git
+    $ git clone https://github.com/MatanShamir1/Arkanoid.git
     ```
 2. Install [Apache Ant](https://ant.apache.org/bindownload.cgi)
 3. [Apache Ant Installation Video Windows 10](https://www.youtube.com/watch?v=3eaW81yYIqY&t=353s&ab_channel=xscourse)
