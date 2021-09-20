@@ -133,9 +133,9 @@ public class Menu implements Animation {
         this.sleeper.sleepFor(sleepTime);
         this.background.drawOn(d);
         d.setColor(Color.BLACK);
-        d.drawText(203, 103, "Arkanoid", 70);
+        d.drawText(243, 103, "Arkanoid", 70);
         d.setColor(Color.RED);
-        d.drawText(200, 100, "Arkanoid", 70);
+        d.drawText(240, 100, "Arkanoid", 70);
         Color defaultColor = Color.BLACK;
         d.setColor(defaultColor);
         for (int j = 0; j <= 1; j++) {
