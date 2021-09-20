@@ -6,6 +6,7 @@ import sprites.Background;
 import sprites.Sprite;
 
 import java.awt.Color;
+import java.io.*;
 
 /**
  * class Game Over is an animation displayed to the player if all lives in the game flow field ended,
@@ -28,7 +29,8 @@ public class Leaderboard implements Animation {
     }
 
     @Override
-    public void doOneFrame(DrawSurface d) {
+    public void doOneFrame(DrawSurface d) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(new File("C:\\Arkanoid", "results.txt")));
         //display the background and the sprites on the screen to show continuation on the screen.
         this.background.drawOn(d);
         d.setColor(Color.BLUE);
@@ -36,16 +38,13 @@ public class Leaderboard implements Animation {
         d.setColor(Color.BLACK);
         //show game over on the screen.
         d.drawText(d.getWidth() / 2 - 100, 50, "Top 10:", 50);
-        d.drawText(30, 100, "1:", 15);
-        d.drawText(30, 140, "2:", 15);
-        d.drawText(30, 180, "3:", 15);
-        d.drawText(30, 220, "4:", 15);
-        d.drawText(30, 260, "5:", 15);
-        d.drawText(30, 300, "6:", 15);
-        d.drawText(30, 340, "7:", 15);
-        d.drawText(30, 380, "8:", 15);
-        d.drawText(30, 420, "9:", 15);
-        d.drawText(30, 460, "10:", 15);
+        for (int i = 1; i<=10; i++){
+            d.drawText(30, 100+40*i, i +":" , 15);
+            String line;
+            if ((line =br.readLine())!=null){
+                d.drawText(70, 100+40*i, line, 15);
+            }
+        }
     }
 
     @Override

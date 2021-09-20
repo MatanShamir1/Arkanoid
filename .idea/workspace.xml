@@ -7,9 +7,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="70112ea9-0c1e-4c89-9ae3-934d0a60fd66" name="Changes" comment="latest working changes">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Arkanoid.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/biuoop_1_4__2_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Arkanoid/gamelogic/GameFlow.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Arkanoid/gamelogic/GameFlow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Arkanoid/gamelogic/Leaderboard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Arkanoid/gamelogic/Leaderboard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Arkanoid/gamelogic/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Arkanoid/gamelogic/Menu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gamelogic/GameFlow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gamelogic/GameFlow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gamelogic/Leaderboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gamelogic/Leaderboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gamelogic/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gamelogic/Menu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,6 +106,8 @@
       <workItem from="1631989711899" duration="550000" />
       <workItem from="1632036935519" duration="25402000" />
       <workItem from="1632082330679" duration="1634000" />
+      <workItem from="1632085785989" duration="135000" />
+      <workItem from="1632121106739" duration="8236000" />
     </task>
     <task id="LOCAL-00001" summary="latest working changes">
       <created>1632081573626</created>
@@ -151,6 +157,17 @@
     <MESSAGE value="added meny anim. velocity upgraded with &quot;get angle&quot;. fix menu anim." />
     <MESSAGE value="latest working changes" />
     <option name="LAST_COMMIT_MESSAGE" value="latest working changes" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/gamelogic/GameFlow.java</url>
+          <line>81</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

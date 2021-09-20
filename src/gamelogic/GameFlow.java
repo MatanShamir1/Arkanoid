@@ -6,6 +6,9 @@ import game.Counter;
 import game.GameLevel;
 import levels.LevelInformation;
 
+import java.io.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -41,7 +44,7 @@ public class GameFlow {
      *
      * @param levels a list of the level's information, to be able to create suitable levels.
      */
-    public void runLevels(List<LevelInformation> levels) throws Exception{
+    public void runLevels(List<LevelInformation> levels) throws Exception {
         //run a for-each loop and do the same for every level:
         for (LevelInformation levelInformation : levels) {
             //create a new level with the information, and give references to this runner, keyboard, etc.
@@ -59,6 +62,7 @@ public class GameFlow {
                 } else {
                     this.animationRunner.run(new KeyPressStoppableAnimation(this.keyboardSensor,
                             new GameOver(this.scoreCounter, level.getSprites(), level.getInformation())));
+                    this.updateLeaderBoard();
                     return;
                 }
             }
@@ -68,7 +72,39 @@ public class GameFlow {
         //if all levels are over without moving to game over, the game is won, perform you win animation.
         this.animationRunner.run(new KeyPressStoppableAnimation(this.keyboardSensor,
                 new YouWin(this.scoreCounter)));
-        this.animationRunner.getGui().close();
+        this.updateLeaderBoard();
+    }
+
+    private void updateLeaderBoard() throws IOException {
+        LinkedList<Integer> leaderBoard = new LinkedList<>();
+        BufferedReader br = new BufferedReader(new FileReader(new File("C:\\Arkanoid", "results.txt")));
+        String line;
+        while ((line = br.readLine()) != null) {
+            leaderBoard.addLast(Integer.parseInt(line));
+        }
+        br.close();
+        int i;
+        boolean added = false;
+        int originalSize= leaderBoard.size();
+        for (i = 0; i < originalSize; i++) {
+            if (this.scoreCounter.getValue() > leaderBoard.get(i)) {
+                leaderBoard.add(i, this.scoreCounter.getValue());
+                added = true;
+            }
+        }
+        if ((i < 9) && (!added)) {
+            leaderBoard.add(i, this.scoreCounter.getValue());
+        }
+        if (i == 10) {
+            leaderBoard.remove(10);
+        }
+        BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\Arkanoid\\results.txt"));
+        for (Integer score : leaderBoard) {
+            bw.write(Integer.toString(score));
+            bw.write("\n");
+        }
+
+        bw.close();
     }
 }
 

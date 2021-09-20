@@ -2,6 +2,7 @@ package gamelogic;
 
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
+import biuoop.Sleeper;
 import game.GameLevel;
 import game.SpriteCollection;
 import levels.*;
@@ -23,6 +24,8 @@ public class Menu implements Animation {
     private SpriteCollection spriteCollection;
     private Ball ballLeft;
     private Ball ballRight;
+    private Sleeper sleeper;
+    private long sleepTime;
 
     public Menu() {
         this.background = this.initBackground();
@@ -32,6 +35,8 @@ public class Menu implements Animation {
         this.runner = new AnimationRunner();
         this.isAlreadyPressed = true;
         createMenuEnvironment();
+        this.sleeper = new Sleeper();
+        this.sleepTime = 0;
     }
 
     private void createMenuEnvironment() {
@@ -125,6 +130,7 @@ public class Menu implements Animation {
     }
 
     private void drawMenu(DrawSurface d) {
+        this.sleeper.sleepFor(sleepTime);
         this.background.drawOn(d);
         d.setColor(Color.BLACK);
         d.drawText(203, 103, "Arkanoid", 70);
@@ -155,36 +161,45 @@ public class Menu implements Animation {
         d.drawLine(630 - 16 * 4, 250, this.ballLeft.getX(), this.ballLeft.getY());
         if (this.ballRight.isActivated()) {
             if ((this.ballRight.getVelocity().getDx() > Math.abs(this.ballRight.getVelocity().getDy())) && (this.ballRight.getVelocity().getDx() > 0)) {
-                this.ballRight.setVelocity(this.ballRight.getVelocity().getDx() - 0.02, this.ballRight.getVelocity().getDy() - 0.02);
+                this.ballRight.setVelocity(this.ballRight.getVelocity().getDx() - 0.026, this.ballRight.getVelocity().getDy() - 0.026);
+                this.sleepTime+=1;
             } else if ((Math.abs(this.ballRight.getVelocity().getDx()) - Math.abs(this.ballRight.getVelocity().getDy()) < Point.EPSILON) && (this.ballRight.getVelocity().getDx() > 0)) {
                 this.ballRight.setVelocity(-this.ballRight.getVelocity().getDx(), -this.ballRight.getVelocity().getDy());
-                this.ballRight.setVelocity(this.ballRight.getVelocity().getDx() - 0.02, this.ballRight.getVelocity().getDy() - 0.02);
+                this.ballRight.setVelocity(this.ballRight.getVelocity().getDx() - 0.026, this.ballRight.getVelocity().getDy() - 0.026);
+                this.sleeper.sleepFor(sleepTime*3);
             } else if ((Math.abs(this.ballRight.getVelocity().getDx()) > Math.abs(this.ballRight.getVelocity().getDy())) && (this.ballRight.getVelocity().getDx() < 0) && (this.ballRight.getVelocity().getDy() >= 0)) {
-                this.ballRight.setVelocity(this.ballRight.getVelocity().getDx() - 0.02, this.ballRight.getVelocity().getDy() - 0.02);
+                this.ballRight.setVelocity(this.ballRight.getVelocity().getDx() - 0.026, this.ballRight.getVelocity().getDy() - 0.026);
+                this.sleepTime-=1;
             } else if (this.ballRight.getVelocity().getDy() < 0) {
                 this.ballRight.setVelocity(-this.ballRight.getVelocity().getDx(), -this.ballRight.getVelocity().getDy());
-                this.ballRight.setVelocity(this.ballRight.getVelocity().getDx() + 0.02, this.ballRight.getVelocity().getDy() + 0.02);
+                this.ballRight.setVelocity(this.ballRight.getVelocity().getDx() + 0.026, this.ballRight.getVelocity().getDy() + 0.026);
                 this.resetBalls();
                 this.ballRight.deactivate();
                 this.ballLeft.activate();
+                this.sleepTime=0;
             }
         } else {
             if ((Math.abs(this.ballLeft.getVelocity().getDx()) > Math.abs(this.ballLeft.getVelocity().getDy())) && (this.ballLeft.getVelocity().getDx() < 0)) {
-                this.ballLeft.setVelocity(this.ballLeft.getVelocity().getDx() + 0.02, this.ballLeft.getVelocity().getDy() - 0.02);
+                this.ballLeft.setVelocity(this.ballLeft.getVelocity().getDx() + 0.026, this.ballLeft.getVelocity().getDy() - 0.026);
+                this.sleepTime+=1;
             } else if ((Math.abs(this.ballLeft.getVelocity().getDx()) - Math.abs(this.ballLeft.getVelocity().getDy()) < Point.EPSILON) && (this.ballLeft.getVelocity().getDx() < 0)) {
                 this.ballLeft.setVelocity(-this.ballLeft.getVelocity().getDx(), -this.ballLeft.getVelocity().getDy());
-                this.ballLeft.setVelocity(this.ballLeft.getVelocity().getDx() + 0.02, this.ballLeft.getVelocity().getDy() - 0.02);
+                this.ballLeft.setVelocity(this.ballLeft.getVelocity().getDx() + 0.026, this.ballLeft.getVelocity().getDy() - 0.026);
+                this.sleeper.sleepFor(sleepTime*3);
             } else if ((Math.abs(this.ballLeft.getVelocity().getDx()) > Math.abs(this.ballLeft.getVelocity().getDy())) && (this.ballLeft.getVelocity().getDx() > 0) && (this.ballLeft.getVelocity().getDy() >= 0)) {
-                this.ballLeft.setVelocity(this.ballLeft.getVelocity().getDx() + 0.02, this.ballLeft.getVelocity().getDy() - 0.02);
+                this.ballLeft.setVelocity(this.ballLeft.getVelocity().getDx() + 0.026, this.ballLeft.getVelocity().getDy() - 0.026);
+                this.sleepTime-=1;
             } else if (this.ballLeft.getVelocity().getDy() < 0) {
                 this.ballLeft.setVelocity(-this.ballLeft.getVelocity().getDx(), -this.ballLeft.getVelocity().getDy());
-                this.ballLeft.setVelocity(this.ballLeft.getVelocity().getDx() - 0.02, this.ballLeft.getVelocity().getDy() + 0.02);
+                this.ballLeft.setVelocity(this.ballLeft.getVelocity().getDx() - 0.026, this.ballLeft.getVelocity().getDy() + 0.026);
                 this.resetBalls();
                 this.ballRight.activate();
                 this.ballLeft.deactivate();
+                this.sleepTime=0;
             }
         }
     }
+
 
     public void activate() {
         try {
@@ -194,7 +209,7 @@ public class Menu implements Animation {
                 //create a list of levels.
                 List<LevelInformation> levels = new ArrayList<>();
                 levels.add(new BullsEye());
-                levels.add(new EasyPeasy());
+//                levels.add(new EasyPeasy());
                 levels.add(new EmpireState());
                 levels.add(new FinalLevel());
                 //run the game flow.
