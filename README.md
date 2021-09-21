@@ -35,8 +35,9 @@ I implemented the game with Java language using Intellij IDEA Ultimate IDE, usin
     ```
     $ git clone https://github.com/MatanShamir1/Arkanoid.git
     ```
-2. Add the biu-oop.jar file as a global library.
-3. Run the game from an IDE such as Intellij, VS, etc.
+2. Open the project from an IDE such as Intellij, VS, etc.
+3. Add the biu-oop.jar file as a global library to the Arkanoid project.
+4. Make sure an updated jdk is set in the configuration for the manu to run on, and click play!
 ## Instructions
 * Press 'Up' or 'Down' arrows to navigate through the manu.
 * Press 'Enter' to select an option\ to start a game.
