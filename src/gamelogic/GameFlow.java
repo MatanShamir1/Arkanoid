@@ -7,7 +7,6 @@ import game.GameLevel;
 import levels.LevelInformation;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 

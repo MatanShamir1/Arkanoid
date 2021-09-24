@@ -1,3 +1,5 @@
 out/
 bin/
 .idea/
+results.txt
+production/
