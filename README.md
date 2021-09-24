@@ -21,15 +21,23 @@ I implemented the game with Java language using Intellij IDEA Ultimate IDE, usin
 * Keyboard that contains: Spacebar (for stoppage), "P" button, and all arrows.
 * Apache Ant
 ## Installation
+### Option 1:
 1. Clone the repository:  
     ```
     $ git clone https://github.com/MatanShamir1/Arkanoid.git
     ```
-2. Install [Apache Ant](https://ant.apache.org/bindownload.cgi)
-3. [Apache Ant Installation Video Windows 10](https://www.youtube.com/watch?v=3eaW81yYIqY&t=353s&ab_channel=xscourse)
+2. Install [Apache Ant](https://ant.apache.org/bindownload.cgi) Link to a guide: [Apache Ant Installation Video Windows 10](https://www.youtube.com/watchv=3eaW81yYIqY&t=353s&ab_channel=xscourse)
 4. Open CMD/Git Bash in the cloned directory and run this command to enter the game manu:
     ```
     $ ant run
+### Option 2:
+1. Clone the repository:  
+    ```
+    $ git clone https://github.com/MatanShamir1/Arkanoid.git
+    ```
+2. Open the project from an IDE such as Intellij, VS, etc.
+3. Add the biu-oop.jar file as a global library to the Arkanoid project.
+4. Make sure an updated jdk is set in the configuration for the manu to run on, and click play!
 ## Instructions
 * Press 'Up' or 'Down' arrows to navigate through the manu.
 * Press 'Enter' to select an option\ to start a game.
