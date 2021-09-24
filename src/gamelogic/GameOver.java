@@ -2,12 +2,16 @@
 package gamelogic;
 
 import biuoop.DrawSurface;
+import biuoop.KeyboardSensor;
 import game.Counter;
 import game.SpriteCollection;
 import levels.LevelInformation;
 import sprites.Sprite;
 
+import javax.swing.plaf.basic.BasicTreeUI;
 import java.awt.Color;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyListener;
 
 /**
  * class Game Over is an animation displayed to the player if all lives in the game flow field ended,
